@@ -72,7 +72,7 @@ body::after{content:"";position:fixed;inset:0;background:var(--grain);opacity:.1
 /* first screen: the tree */
 .hero{position:relative;height:100%;overflow:hidden}
 #gl,#ov{position:absolute;inset:0;width:100%;height:100%;display:block}
-#gl{touch-action:none}
+#gl{touch-action:pan-y}
 #ov{pointer-events:none}
 @media (pointer:fine){#gl{cursor:none}}
 .hero .corner{width:calc(var(--u)*30);height:calc(var(--u)*30)}
@@ -524,11 +524,12 @@ html.ready .screen{opacity:1;transition:opacity .6s var(--ease-out)}
 /* opening card: the script line, set like a vintage greeting */
 .ctext .big{font-size:calc(var(--u)*12.4);line-height:1.12;margin:calc(var(--u)*3) 0 calc(var(--u)*2)}
 .ctext .sub:empty{display:none}
-.ctext small.sig{margin-top:calc(var(--u)*5);text-transform:none;letter-spacing:.08em;font-size:max(10px, calc(var(--u)*3));color:var(--ink-soft)}
+.ctext small.sig .heart{width:1.3em;height:1.3em;margin-left:.15em}
+.ctext small.sig{margin-top:calc(var(--u)*5);text-transform:none;letter-spacing:.1em;font-size:max(10px, calc(var(--u)*2.8));color:rgba(238,235,229,.34);mix-blend-mode:screen}
 .ctext{padding:0 calc(var(--u)*9)}
 
 /* the whole tree screen belongs to the tree: drags light it, they don't scroll */
-.hero,.hero .sleeve{touch-action:none}
+.hero,.hero .sleeve{touch-action:pan-y}
 .hero .down,.hero .spk,.hero .shr{touch-action:manipulation}
 /* hand-drawn arrows in text buttons */
 .hd{display:inline-block;width:1.25em;height:1.25em;vertical-align:-.3em;margin-left:.2em;overflow:visible}
@@ -539,6 +540,18 @@ html.ready .screen{opacity:1;transition:opacity .6s var(--ease-out)}
 .spk,.shr{min-width:60px;min-height:56px;z-index:3}
 /* the opening card shows the same worn, inked paper that lies under the whole card */
 .card{background:rgba(10,10,11,.3)}
+.desk-note{display:flex;flex-direction:column;align-items:center;gap:6px;bottom:12px}
+.desk-note .dn-l1{display:inline-flex;align-items:center;gap:.45em}
+.heart{display:inline-block;width:1.35em;height:1.35em;vertical-align:-.32em;overflow:visible}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.desk-note .dn-handle{position:relative;display:inline-block;border:0!important;letter-spacing:.14em!important;text-transform:uppercase!important}
+.desk-note .dn-handle span{display:inline-block;transition:opacity .35s ease,transform .35s ease}
+.desk-note .dn-handle .h2{position:absolute;left:calc(100% + 2.1em);top:0;white-space:nowrap;opacity:0;transform:translateX(-6px);text-transform:none;letter-spacing:.06em;pointer-events:none}
+.desk-note .dn-handle:hover .h1,.desk-note .dn-handle:focus-visible .h1{color:rgba(238,235,229,.8)}
+.desk-note .dn-handle:hover .h2,.desk-note .dn-handle:focus-visible .h2{opacity:1;transform:none;color:rgba(238,235,229,.7)}
+.desk-note .dn-l1 .heart{margin-left:.1em;transition:opacity .3s ease}
+.desk-note a{color:inherit;text-decoration:none;text-transform:none;letter-spacing:.06em;pointer-events:auto;border-bottom:1px solid rgba(238,235,229,.25);padding-bottom:1px;transition:color .2s,border-color .2s}
+.desk-note a:hover{color:rgba(238,235,229,.85)}
 /* keep the opening card perfectly still: no jumping film grain, flicker or scratch line */
 .card::before{display:none!important;animation:none!important}
 .card.on .ctext,.card.on .cframe{animation:none!important}
@@ -559,6 +572,7 @@ html.ready .screen{opacity:1;transition:opacity .6s var(--ease-out)}
 .sheet-opt svg{min-width:52px;min-height:52px}
 .sheet-cancel{min-height:54px}
 .gift{min-height:64px}
+@media (max-width:600px){.desk-note{display:none!important}}
 </style>
 </head>
 <body>
@@ -654,13 +668,13 @@ html.ready .screen{opacity:1;transition:opacity .6s var(--ease-out)}
           <div data-orn="frame" data-cls="fc tl"></div><div data-orn="frame" data-cls="fc tr"></div>
           <div data-orn="frame" data-cls="fc bl"></div><div data-orn="frame" data-cls="fc br"></div>
         </div>
-        <div class="ctext"><div class="big">It’s Beginning<br>to Look a Lot<br>Like Christmas…</div><div class="sub"></div><small class="sig">@byanwesha with love &lt;3</small></div>
+        <div class="ctext"><div class="big">It’s Beginning<br>to Look a Lot<br>Like Christmas…</div><div class="sub"></div><small class="sig">with love @byanwesha <svg class="heart" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" filter="url(#inkSm)"><path d="M20.2 31.2C15.4 27.4 9.8 23.4 8.7 17.6C8 13.6 10.5 10.3 14.1 10.1C16.9 10 18.9 11.9 20.1 14.6C21.3 11.7 23.5 9.9 26.2 10.1C29.7 10.4 32.1 13.7 31.3 17.7C30.2 23.3 25 27.4 20.6 31.4" stroke-width="2.2"/><path d="M20.2 31.2C15.4 27.4 9.8 23.4 8.7 17.6C8 13.6 10.5 10.3 14.1 10.1C16.9 10 18.9 11.9 20.1 14.6C21.3 11.7 23.5 9.9 26.2 10.1C29.7 10.4 32.1 13.7 31.3 17.7C30.2 23.3 25 27.4 20.6 31.4" stroke-width="1.10" opacity=".45" transform="translate(.5 .4) rotate(1.2 20 20)"/></svg><span class="sr">love</span></small></div>
         <div class="skip">Tap to skip</div>
       </div>
     </div>
   </div>
   <button class="desk-replay" id="replay"><svg class="hd" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" filter="url(#inkSm)"><path d="M29 14.6C26.8 10.8 22.6 8.7 18.2 9.4C12.4 10.3 8.6 16 9.7 21.7C10.8 27.3 16.5 31 22.1 29.8C26.1 29 29.2 25.8 30 21.9" stroke-width="2.1"/><path d="M29 14.6C26.8 10.8 22.6 8.7 18.2 9.4C12.4 10.3 8.6 16 9.7 21.7C10.8 27.3 16.5 31 22.1 29.8C26.1 29 29.2 25.8 30 21.9" stroke-width="1.05" opacity=".45" transform="translate(.5 .4) rotate(.8 20 20)"/><path d="M29.8 7.6C29.8 10.2 29.6 12.6 29.2 14.9C26.8 14.8 24.5 14.6 22.2 14.8" stroke-width="2.1"/><path d="M29.8 7.6C29.8 10.2 29.6 12.6 29.2 14.9C26.8 14.8 24.5 14.6 22.2 14.8" stroke-width="1.05" opacity=".45" transform="translate(.5 .4) rotate(.8 20 20)"/></svg> Watch from the start <kbd>R</kbd></button>
-  <p class="desk-note">Made for phones. Move across the tree.</p>
+  <p class="desk-note"><span class="dn-l1">Made for mobile</span><span class="dn-l1">with love&nbsp;<a class="dn-handle" href="mailto:byanwesha@gmail.com" aria-label="@byanwesha, email byanwesha@gmail.com"><span class="h1">@byanwesha</span><span class="h2" aria-hidden="true">byanwesha@gmail.com</span></a><svg class="heart" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" filter="url(#inkSm)"><path d="M20.2 31.2C15.4 27.4 9.8 23.4 8.7 17.6C8 13.6 10.5 10.3 14.1 10.1C16.9 10 18.9 11.9 20.1 14.6C21.3 11.7 23.5 9.9 26.2 10.1C29.7 10.4 32.1 13.7 31.3 17.7C30.2 23.3 25 27.4 20.6 31.4" stroke-width="2.2"/><path d="M20.2 31.2C15.4 27.4 9.8 23.4 8.7 17.6C8 13.6 10.5 10.3 14.1 10.1C16.9 10 18.9 11.9 20.1 14.6C21.3 11.7 23.5 9.9 26.2 10.1C29.7 10.4 32.1 13.7 31.3 17.7C30.2 23.3 25 27.4 20.6 31.4" stroke-width="1.10" opacity=".45" transform="translate(.5 .4) rotate(1.2 20 20)"/></svg></span></p>
   <section class="panel" id="panel" aria-label="Grain controls">
     <header><h2>Tune the grain</h2><button class="x" id="gclose">Close</button></header>
     <p class="hint">Changes show live and are remembered on this device. When it looks right, copy the settings and paste them back to me.</p>
@@ -866,8 +880,8 @@ function setUnit(){
 }
 function fitPhone(){
   if (innerWidth <= 600){ phoneEl.style.transform = ''; setUnit(); return; }
-  const s = Math.min(1, (innerHeight-96)/868, (innerWidth-40)/414);
-  phoneEl.style.transform = `translate(-50%,-50%) scale(${s})`; setUnit();
+  const s = Math.min(1, (innerHeight-120)/868, (innerWidth-40)/414);
+  phoneEl.style.transform = `translate(-50%,calc(-50% - 16px)) scale(${s})`; setUnit();
 }
 /* a name in the link (#priya) personalises the card; returning visitors are welcomed back */
 const NAME = (()=>{ const h = (location.hash || '').slice(1); if (!/^[a-z][a-z0-9-]{0,30}$/i.test(h) || h.toLowerCase() === 'tune') return '';
@@ -1231,7 +1245,25 @@ glc.addEventListener('pointermove', e=>{ if (!revealed) return; if (e.pointerTyp
 glc.addEventListener('pointerup', e=>{ Music.unlock(); if (e.pointerType !== 'mouse') pointer.on = false;
   // a quick upward flick (not a slow drag) moves on to the next screen; slow drags just play with the tree
   const dy = e.clientY - flick.y, dx = e.clientX - flick.x, dt = performance.now() - flick.t, sc = heroEl.getBoundingClientRect().height/heroEl.offsetHeight || 1;
-  if (e.pointerType !== 'mouse' && dt < 320 && dy/sc < -70 && Math.abs(dy) > 2.2*Math.abs(dx) && window.__glideTo) window.__glideTo(heroEl.offsetHeight); });
+  });
+/* swipe to scroll, touch-and-move to play:
+   a quick up/down swipe scrolls the page like any page; a finger that rests a moment, or moves sideways, lights the tree and the page stays still */
+const gest = { mode:'', t:0, x:0, y:0 };
+glc.addEventListener('touchstart', e=>{ const p = e.touches[0]; gest.mode = ''; gest.t = performance.now(); gest.x = p.clientX; gest.y = p.clientY; gest.st0 = scrollerEl.scrollTop; }, { passive:true });
+glc.addEventListener('touchmove', e=>{
+  if (e.touches.length > 1) return;
+  gest.ly = e.touches[0].clientY;
+  if (!gest.mode){ const p = e.touches[0], dx = p.clientX - gest.x, dy = p.clientY - gest.y, held = performance.now() - gest.t;
+    // decided on the very first move, because that's the only moment a browser lets us keep the page still
+    gest.mode = (held >= 120 || Math.abs(dx) > Math.abs(dy)*1.2 + 2 || !revealed) ? 'light' : 'scroll';
+    if (gest.mode === 'scroll'){ pointer.on = false; } }
+  if (gest.mode === 'light' && e.cancelable) e.preventDefault();
+}, { passive:false });
+glc.addEventListener('touchend', e=>{
+  // safety net: if a clear upward swipe didn't move the page (some browsers hold the scroll), glide to the next screen ourselves
+  const dy = (gest.ly != null ? gest.ly : gest.y) - gest.y; gest.ly = null;
+  if (gest.mode === 'scroll' && Math.abs(scrollerEl.scrollTop - gest.st0) < 4 && dy < -60 && window.__glideTo) window.__glideTo(heroEl.offsetHeight);
+  gest.mode = ''; }, { passive:true });
 const flick = { x:0, y:0, t:0 };
 glc.addEventListener('pointercancel', ()=>{ pointer.on = false; });
 glc.addEventListener('pointerleave', e=>{ if (e.pointerType === 'mouse'){ pointer.on = false; pointer.cx = pointer.cy = -100; } });
